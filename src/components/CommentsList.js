@@ -5,6 +5,7 @@ class CommentsList extends Component {
    render() {
       return (
          <div>
+            <h4>Comments List</h4>
             <ul>
                {this.props.comments.map(comment => {
                   return <li>{comment}</li>

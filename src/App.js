@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
 import './App.css';
 
 import CommentsBox from './components/CommentsBox';
@@ -8,8 +10,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CommentsBox />
-        <CommentsList />
+        <Route path="/post" component={CommentsBox} />
+        <Route path="/" exact component={CommentsList} />
       </div>
     );
   }
