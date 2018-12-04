@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actions from './actions';
 
 import './App.css';
 
@@ -11,9 +12,9 @@ class App extends Component {
 
   renderButton () {
     if (this.props.auth) {
-      return <button>Sign Out</button>;
+      return <button onClick={() => this.props.onChangeAuth(false)}>Sign Out</button>;
     } else {
-      return <button>Sign In</button>;
+      return <button onClick={() => this.props.onChangeAuth(true)}>Sign In</button>;
     }
   }
 
@@ -50,4 +51,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChangeAuth: (isLoggedIn) => dispatch(actions.changeAuth(isLoggedIn))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

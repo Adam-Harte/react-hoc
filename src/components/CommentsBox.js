@@ -8,6 +8,20 @@ class CommentsBox extends Component {
       comments: []
    };
 
+   componentDidMount() {
+      this.shouldNavigateAway();
+   }
+
+   componentDidUpdate() {
+      this.shouldNavigateAway();
+   }
+
+   shouldNavigateAway () {
+      if (!this.props.auth) {
+         this.props.history.push("/");
+      }
+   }
+
    handleChange = event => {
       this.setState({ comment: event.target.value })
    }
@@ -36,6 +50,12 @@ class CommentsBox extends Component {
    }
 }
 
+const mapStateToProps = (state) => {
+   return {
+      auth: state.auth
+   }
+}
+
 const mapDispatchToProps = (dispatch) => {
    return {
       onSaveComment: (comment) => {
@@ -47,4 +67,4 @@ const mapDispatchToProps = (dispatch) => {
    }
 }
 
-export default connect(null, mapDispatchToProps)(CommentsBox);
+export default connect(mapStateToProps, mapDispatchToProps)(CommentsBox);
